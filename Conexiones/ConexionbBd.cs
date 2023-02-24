@@ -12,7 +12,6 @@
             connectionString = constructor.GetSection("ConnectionStrings:conexionmaestra").Value;
 
         }
-
         public string cadenaSQL()
         {
             return connectionString;

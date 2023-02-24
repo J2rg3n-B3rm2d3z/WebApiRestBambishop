@@ -9,21 +9,48 @@ namespace ApiRestBambishop.Controllers
     public class ClienteControlador:ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<List<Mcliente>>> Get()
+        public async Task<ActionResult<List<MCliente>>> Get()
         {
             var funcion = new Dcliente();
-            var lista = await funcion.Mostrarclientes();
+            var lista = await funcion.MostrarClientes();
             return lista;
         }
 
-        [HttpGet("{IdCliente}")]
-        public async Task<ActionResult<List<Mcliente>>> GetbyId(int IdCliente)
+        [HttpGet("cliente:{IdCliente}")]
+        public async Task<ActionResult<List<MCliente>>> GetbyId(int IdCliente)
         {
-            var parametros = new Mcliente();
+            var parametros = new MCliente();
             parametros.IdCliente = IdCliente;
             var funcion = new Dcliente();
             var lista = await funcion.MostrarClientePorId(parametros);
             return lista;
+        }
+
+        [HttpPost]
+        public async Task Post([FromBody] MCliente parametros)
+        {
+            var funcion = new Dcliente();
+            await funcion.InsertarCliente(parametros);
+        }
+
+        [HttpPut("cliente:{IdCliente}")]
+        public async Task<ActionResult> Put(int IdCliente, [FromBody] MCliente parametros)
+        {
+            var funcion = new Dcliente();
+            parametros.IdCliente = IdCliente;
+            await funcion.EditarCliente(parametros);
+            return NoContent();
+        }
+
+        [HttpDelete("cliente:{IdCliente}")]
+        public async Task<ActionResult> Delete(int IdCliente)
+        {
+            var funcion = new Dcliente();
+            var parametros = new MCliente();
+            parametros.IdCliente = IdCliente;
+            await funcion.EliminarCliente(parametros);
+            return NoContent();
+
         }
     }
 }
