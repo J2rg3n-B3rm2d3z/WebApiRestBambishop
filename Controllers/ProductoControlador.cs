@@ -8,7 +8,7 @@ namespace ApiRestBambishop.Controllers
     [Route("apibambishop/producto")]
     public class ProductoControlador:ControllerBase
     {
-        [HttpGet]q
+        [HttpGet]
         public async Task<ActionResult<List<Mproducto>>> Get()
         {
             var funcion = new Dproducto();
